@@ -8,4 +8,13 @@ public class Motocicleta {
     private int cilindrada;
     private int rendimiento;
     private boolean abs;
+
+    //Metodos
+    public void registrarMotocicleta(){
+
+    }
+    public void mostrarDatos() {
+
+    }
 }
+
