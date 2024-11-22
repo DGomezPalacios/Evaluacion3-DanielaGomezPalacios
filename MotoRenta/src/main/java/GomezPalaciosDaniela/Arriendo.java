@@ -19,8 +19,10 @@ public class Arriendo {
         this.motocicleta = motocicleta;
     }
 
+
+    //Metodos
+
     public static void realizarArriendo() {
-        // Formularios para ingresar datos
         JTextField campoFecha = new JTextField();
         JTextField campoHora = new JTextField();
         JTextField campoValor = new JTextField();

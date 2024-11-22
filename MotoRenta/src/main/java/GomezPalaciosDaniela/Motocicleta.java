@@ -23,72 +23,17 @@ public class Motocicleta {
         this.abs = abs;
     }
     public static ArrayList<Motocicleta> getMotocicletas() {
-        return motocicletas; //
+        return motocicletas;
     }
 
-    public String getPatente() {
-        return patente;
-    }
-
-    public void setPatente(String patente) {
-        this.patente = patente;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
 
     public String getModelo() {
         return modelo;
     }
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public int getMaxVelocidad() {
-        return maxVelocidad;
-    }
-
-    public void setMaxVelocidad(int maxVelocidad) {
-        this.maxVelocidad = maxVelocidad;
-    }
-
-    public int getCilindrada() {
-        return cilindrada;
-    }
-
-    public void setCilindrada(int cilindrada) {
-        this.cilindrada = cilindrada;
-    }
-
-    public int getRendimiento() {
-        return rendimiento;
-    }
-
-    public void setRendimiento(int rendimiento) {
-        this.rendimiento = rendimiento;
-    }
-
-    public boolean isAbs() {
-        return abs;
-    }
-
-    public void setAbs(boolean abs) {
-        this.abs = abs;
-    }
-
-    public static void setMotocicletas(ArrayList<Motocicleta> motocicletas) {
-        Motocicleta.motocicletas = motocicletas;
-    }
-
+//Metodos
 
     public static void registrarMotocicleta() {
-        // Crear formulario para ingresar los datos
         JTextField campoPatente = new JTextField();
         JTextField campoMarca = new JTextField();
         JTextField campoModelo = new JTextField();
@@ -128,7 +73,6 @@ public class Motocicleta {
         }
     }
     public static void listarMotocicletasPorCilindrada() {
-        // Crear cadenas para alta y baja cilindrada
         StringBuilder altaCilindrada = new StringBuilder("Motocicletas de Alta Cilindrada:\n");
         StringBuilder bajaCilindrada = new StringBuilder("Motocicletas de Baja Cilindrada:\n");
 
@@ -146,7 +90,6 @@ public class Motocicleta {
             }
         }
 
-        // Mostrar el resultado en un cuadro de diálogo
         JTextArea textArea = new JTextArea(altaCilindrada + "\n" + bajaCilindrada);
         JScrollPane scrollPane = new JScrollPane(textArea);
         textArea.setLineWrap(true);
@@ -162,7 +105,6 @@ public class Motocicleta {
     public boolean esBajaCilindrada() {
         return cilindrada >= 100 && cilindrada <= 600;
     }
-
 
     @Override
     public String toString() {

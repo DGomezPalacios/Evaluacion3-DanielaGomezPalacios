@@ -25,7 +25,7 @@ public class Cliente {
         return nombreCompleto;
     }
 
-    // Método para agregar un cliente
+    //Metodos
     public static void agregarCliente() {
         JTextField campoRut = new JTextField();
         JTextField campoNombre = new JTextField();
@@ -60,7 +60,6 @@ public class Cliente {
         }
     }
 
-    // Método para eliminar un cliente
     public static void eliminarCliente() {
         JComboBox<Cliente> comboClientes = new JComboBox<>(clientes.toArray(new Cliente[0]));
         int opcion = JOptionPane.showConfirmDialog(null, comboClientes, "Seleccione Cliente a Eliminar", JOptionPane.OK_CANCEL_OPTION);
@@ -76,7 +75,6 @@ public class Cliente {
         }
     }
 
-    // Método para modificar un cliente
     public static void modificarCliente() {
         JComboBox<Cliente> comboClientes = new JComboBox<>(clientes.toArray(new Cliente[0]));
         int opcion = JOptionPane.showConfirmDialog(null, comboClientes, "Seleccione Cliente a Modificar", JOptionPane.OK_CANCEL_OPTION);

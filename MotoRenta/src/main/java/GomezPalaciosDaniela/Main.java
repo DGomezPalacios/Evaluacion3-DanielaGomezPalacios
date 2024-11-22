@@ -5,7 +5,6 @@ import javax.swing.*;
 public class Main extends JFrame {
 
     public Main() {
-        // Configuración del JFrame
         setTitle("Sistema de Administración de Ventas - MotoRenta");
         setSize(600, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
