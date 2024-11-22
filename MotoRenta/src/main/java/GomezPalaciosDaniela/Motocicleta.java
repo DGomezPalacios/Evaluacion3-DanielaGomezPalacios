@@ -85,10 +85,6 @@ public class Motocicleta {
     public static void setMotocicletas(ArrayList<Motocicleta> motocicletas) {
         Motocicleta.motocicletas = motocicletas;
     }
-    @Override
-    public String toString() {
-        return marca + " " + modelo;
-    }
 
 
     public static void registrarMotocicleta() {
@@ -131,6 +127,33 @@ public class Motocicleta {
             }
         }
     }
+    public static void listarMotocicletasPorCilindrada() {
+        // Crear cadenas para alta y baja cilindrada
+        StringBuilder altaCilindrada = new StringBuilder("Motocicletas de Alta Cilindrada:\n");
+        StringBuilder bajaCilindrada = new StringBuilder("Motocicletas de Baja Cilindrada:\n");
+
+        for (Motocicleta moto : motocicletas) {
+            if (moto.esAltaCilindrada()) {
+                altaCilindrada.append("Patente: ").append(moto.patente).append(", ")
+                        .append("Marca: ").append(moto.marca).append(", ")
+                        .append("Modelo: ").append(moto.modelo).append(", ")
+                        .append("Cilindrada: ").append(moto.cilindrada).append(" cc\n");
+            } else if (moto.esBajaCilindrada()) {
+                bajaCilindrada.append("Patente: ").append(moto.patente).append(", ")
+                        .append("Marca: ").append(moto.marca).append(", ")
+                        .append("Modelo: ").append(moto.modelo).append(", ")
+                        .append("Cilindrada: ").append(moto.cilindrada).append(" cc\n");
+            }
+        }
+
+        // Mostrar el resultado en un cuadro de diálogo
+        JTextArea textArea = new JTextArea(altaCilindrada + "\n" + bajaCilindrada);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        scrollPane.setPreferredSize(new java.awt.Dimension(500, 400));
+        JOptionPane.showMessageDialog(null, scrollPane, "Reporte de Motocicletas por Cilindrada", JOptionPane.INFORMATION_MESSAGE);
+    }
 
     public static void mostrarDatos() {
         StringBuilder datos = new StringBuilder("Motocicletas Registradas:\n");
@@ -145,5 +168,19 @@ public class Motocicleta {
         }
         JOptionPane.showMessageDialog(null, datos.toString(), "Lista de Motocicletas", JOptionPane.INFORMATION_MESSAGE);
     }
+    public boolean esAltaCilindrada() {
+        return cilindrada >= 650 && cilindrada <= 1250;
+    }
+
+    public boolean esBajaCilindrada() {
+        return cilindrada >= 100 && cilindrada <= 600;
+    }
+
+
+    @Override
+    public String toString() {
+        return marca + " " + modelo + " (" + cilindrada + " cc)";
+    }
+
 }
 

@@ -33,24 +33,31 @@ public class Main extends JFrame {
         // Menú Motocicleta
         JMenu menuMotocicleta = new JMenu("Motocicleta");
         JMenuItem registrarMotocicleta = new JMenuItem("Registrar Motocicleta");
-        JMenuItem mostrarMotocicletas = new JMenuItem("Mostrar Motocicletas");
 
         registrarMotocicleta.addActionListener(e -> Motocicleta.registrarMotocicleta());
-        mostrarMotocicletas.addActionListener(e -> Motocicleta.mostrarDatos());
 
         menuMotocicleta.add(registrarMotocicleta);
-        menuMotocicleta.add(mostrarMotocicletas);
+
 
         // Menú Arriendo
         JMenu menuArriendo = new JMenu("Arriendo");
         JMenuItem realizarArriendo = new JMenuItem("Realizar Arriendo");
-        JMenuItem listarArriendos = new JMenuItem("Listar Arriendos");
 
         realizarArriendo.addActionListener(e -> Arriendo.realizarArriendo());
-        listarArriendos.addActionListener(e -> Arriendo.listarArriendos());
 
         menuArriendo.add(realizarArriendo);
-        menuArriendo.add(listarArriendos);
+
+
+        // Menú Reportes
+        JMenu menuReportes = new JMenu("Reportes");
+        JMenuItem reporteMotocicletas = new JMenuItem("Listar Motocicletas por Cilindrada");
+        JMenuItem reporteArriendos = new JMenuItem("Listar Arriendos");
+
+        reporteMotocicletas.addActionListener(e -> Motocicleta.listarMotocicletasPorCilindrada());
+        reporteArriendos.addActionListener(e -> Arriendo.listarArriendos());
+
+        menuReportes.add(reporteMotocicletas);
+        menuReportes.add(reporteArriendos);
 
         // Menú Salir
         JMenu menuSalir = new JMenu("Salir");
@@ -61,6 +68,7 @@ public class Main extends JFrame {
         menuBar.add(menuCliente);
         menuBar.add(menuMotocicleta);
         menuBar.add(menuArriendo);
+        menuBar.add(menuReportes);
         menuBar.add(menuSalir);
 
         setJMenuBar(menuBar);
