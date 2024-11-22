@@ -155,19 +155,6 @@ public class Motocicleta {
         JOptionPane.showMessageDialog(null, scrollPane, "Reporte de Motocicletas por Cilindrada", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public static void mostrarDatos() {
-        StringBuilder datos = new StringBuilder("Motocicletas Registradas:\n");
-        for (Motocicleta moto : motocicletas) {
-            datos.append("Patente: ").append(moto.patente).append("\n")
-                    .append("Marca: ").append(moto.marca).append("\n")
-                    .append("Modelo: ").append(moto.modelo).append("\n")
-                    .append("Velocidad Máxima: ").append(moto.maxVelocidad).append(" km/h\n")
-                    .append("Cilindrada: ").append(moto.cilindrada).append(" cc\n")
-                    .append("Rendimiento: ").append(moto.rendimiento).append(" km/l\n")
-                    .append("ABS: ").append(moto.abs ? "Sí" : "No").append("\n\n");
-        }
-        JOptionPane.showMessageDialog(null, datos.toString(), "Lista de Motocicletas", JOptionPane.INFORMATION_MESSAGE);
-    }
     public boolean esAltaCilindrada() {
         return cilindrada >= 650 && cilindrada <= 1250;
     }
