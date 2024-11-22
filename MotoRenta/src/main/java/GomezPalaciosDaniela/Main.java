@@ -2,70 +2,74 @@ package GomezPalaciosDaniela;
 
 import javax.swing.*;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main extends JFrame {
-    public static void main(String[] args) {
-        Cliente cliente = new Cliente();
-        Motocicleta motocicleta = new Motocicleta();
-        Arriendo arriendo = new Arriendo();
+
+    public Main() {
+        // Configuración del JFrame
+        setTitle("Sistema de Administración de Ventas - MotoRenta");
+        setSize(600, 400);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        inicializarMenu();
     }
-    //Menú
-    int opcion;
-    do {
-        System.out.println("**** MotoRenta ****");
-        System.out.println("1. Gestión de Clientes");
-        System.out.println("2. Gestión de Motocicletas");
-        System.out.println("3. Gestión de Arrendamientos");
-        System.out.println("4. Despliegue de Reportes");
-        System.out.println("5. Salir");
-        System.out.print("Ingrese una opción: ");
-        opcion = leerOpcion();
 
-        switch (opcion) {
-            case 1:
-                gestionClientes(cliente);
-                break;
-            case 2:
-                gestionMotocicletas(motocicleta);
-                break;
-            case 3:
-                gestionArriendos(cliente, motocicleta, arriendo);
-                break;
-            case 4:
-                despliegueReportes(arriendo);
-                break;
-            case 5:
-                System.out.println("¡Hasta luego!");
-                break;
-            default:
-                System.out.println("Opción inválida. Intente de nuevo.");
-        }
-    } while (opcion != 5);
+    private void inicializarMenu() {
+        JMenuBar menuBar = new JMenuBar();
 
+        // Menú Cliente
+        JMenu menuCliente = new JMenu("Cliente");
+        JMenuItem agregarCliente = new JMenuItem("Agregar Cliente");
+        JMenuItem eliminarCliente = new JMenuItem("Eliminar Cliente");
+        JMenuItem modificarCliente = new JMenuItem("Modificar Cliente");
 
-private static int leerOpcion() {
-    // Lógica para leer la opción del usuario
-}
-private static void gestionClientes(Cliente cliente) {
-    // Llamada a los métodos de la clase Cliente
-    cliente.agregarCliente();
-    cliente.eliminarCliente();
-    cliente.modificarCliente();
-}
+        agregarCliente.addActionListener(e -> Cliente.agregarCliente());
+        eliminarCliente.addActionListener(e -> Cliente.eliminarCliente());
+        modificarCliente.addActionListener(e -> Cliente.modificarCliente());
 
-private static void gestionMotocicletas(Motocicleta motocicleta) {
-    // Llamada al método de la clase Motocicleta
-    motocicleta.registrarMotocicleta();
-}
+        menuCliente.add(agregarCliente);
+        menuCliente.add(eliminarCliente);
+        menuCliente.add(modificarCliente);
 
-private static void gestionArriendos(Cliente cliente, Motocicleta motocicleta, Arriendo arriendo) {
-    // Llamada al método de la clase Arriendo
-    arriendo.realizarArriendo();
-}
+        // Menú Motocicleta
+        JMenu menuMotocicleta = new JMenu("Motocicleta");
+        JMenuItem registrarMotocicleta = new JMenuItem("Registrar Motocicleta");
+        JMenuItem mostrarMotocicletas = new JMenuItem("Mostrar Motocicletas");
 
-private static void despliegueReportes(Arriendo arriendo) {
-    // Llamada a los métodos de la clase Arriendo para generar reportes
-    arriendo.listarArriendosAlta();
-    arriendo.listarArriendosBaja();
+        registrarMotocicleta.addActionListener(e -> Motocicleta.registrarMotocicleta());
+        mostrarMotocicletas.addActionListener(e -> Motocicleta.mostrarDatos());
+
+        menuMotocicleta.add(registrarMotocicleta);
+        menuMotocicleta.add(mostrarMotocicletas);
+
+        // Menú Arriendo
+        JMenu menuArriendo = new JMenu("Arriendo");
+        JMenuItem realizarArriendo = new JMenuItem("Realizar Arriendo");
+        JMenuItem listarArriendos = new JMenuItem("Listar Arriendos");
+
+        realizarArriendo.addActionListener(e -> Arriendo.realizarArriendo());
+        listarArriendos.addActionListener(e -> Arriendo.listarArriendos());
+
+        menuArriendo.add(realizarArriendo);
+        menuArriendo.add(listarArriendos);
+
+        // Menú Salir
+        JMenu menuSalir = new JMenu("Salir");
+        JMenuItem salir = new JMenuItem("Salir");
+        salir.addActionListener(e -> System.exit(0));
+        menuSalir.add(salir);
+
+        menuBar.add(menuCliente);
+        menuBar.add(menuMotocicleta);
+        menuBar.add(menuArriendo);
+        menuBar.add(menuSalir);
+
+        setJMenuBar(menuBar);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            Main main = new Main();
+            main.setVisible(true);
+        });
+    }
 }

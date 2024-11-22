@@ -1,108 +1,122 @@
 package GomezPalaciosDaniela;
 
+import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Cliente {
     private String rut;
     private String nombreCompleto;
     private String telefono;
     private String correo;
-
     private static ArrayList<Cliente> clientes = new ArrayList<>();
-    //Constructor
-    public Cliente() {
-    }
-    //Constructor con parámetros
+
     public Cliente(String rut, String nombreCompleto, String telefono, String correo) {
         this.rut = rut;
         this.nombreCompleto = nombreCompleto;
         this.telefono = telefono;
         this.correo = correo;
     }
-    //Getters y Setters
-    public String getRut() {
-        return rut;
-    }
 
-    public void setRut(String rut) {
-        this.rut = rut;
+    public static ArrayList<Cliente> getClientes() {
+        return clientes;
     }
 
     public String getNombreCompleto() {
         return nombreCompleto;
     }
 
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
-    }
+    // Método para agregar un cliente
+    public static void agregarCliente() {
+        JTextField campoRut = new JTextField();
+        JTextField campoNombre = new JTextField();
+        JTextField campoTelefono = new JTextField();
+        JTextField campoCorreo = new JTextField();
 
-    public String getTelefono() {
-        return telefono;
-    }
+        Object[] mensaje = {
+                "RUT:", campoRut,
+                "Nombre Completo:", campoNombre,
+                "Teléfono:", campoTelefono,
+                "Correo Electrónico:", campoCorreo
+        };
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
+        int opcion = JOptionPane.showConfirmDialog(null, mensaje, "Agregar Cliente", JOptionPane.OK_CANCEL_OPTION);
+        if (opcion == JOptionPane.OK_OPTION) {
+            try {
+                String rut = campoRut.getText();
+                String nombre = campoNombre.getText();
+                String telefono = campoTelefono.getText();
+                String correo = campoCorreo.getText();
 
-    public String getCorreo() {
-        return correo;
-    }
+                if (rut.isEmpty() || nombre.isEmpty() || telefono.isEmpty() || correo.isEmpty()) {
+                    throw new IllegalArgumentException("Todos los campos son obligatorios.");
+                }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    //To String
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "rut='" + rut + '\'' +
-                ", nombreCompleto='" + nombreCompleto + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", correo='" + correo + '\'' +
-                '}';
-    }
-
-    //Metodos
-    public void agregarCliente(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese rut:");
-        String rut= scanner.nextLine();
-        System.out.println("Ingrese nombre completo:");
-        String nombreCompleto = scanner.nextLine();
-        System.out.println("Ingrese Teléfono:");
-        String telefono = scanner.nextLine();
-        System.out.println("Ingrese Correo:");
-        String correo = scanner.nextLine();
-
-        clientes.add(new Cliente(rut, nombreCompleto, telefono, correo));
-        System.out.println("Cliente agregado exitosamente.");
-    }
-    public void eliminarCliente() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Ingrese RUT del cliente a eliminar:");
-        String rut = sc.nextLine();
-        clientes.removeIf(cliente -> cliente.rut.equals(rut));
-        System.out.println("Cliente eliminado, si existía.");
-    }
-    public void modificarCliente() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Ingrese RUT del cliente a modificar:");
-        String rut = sc.nextLine();
-
-        for (Cliente cliente : clientes) {
-            if (cliente.rut.equals(rut)) {
-                System.out.println("Ingrese Nuevo Nombre:");
-                cliente.nombreCompleto = sc.nextLine();
-                System.out.println("Ingrese Nuevo Teléfono:");
-                cliente.telefono = sc.nextLine();
-                System.out.println("Ingrese Nuevo Correo:");
-                cliente.correo = sc.nextLine();
-                System.out.println("Cliente modificado exitosamente.");
-                return;
+                Cliente nuevoCliente = new Cliente(rut, nombre, telefono, correo);
+                clientes.add(nuevoCliente);
+                JOptionPane.showMessageDialog(null, "Cliente agregado exitosamente.");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-        System.out.println("Cliente no encontrado.");
+    }
+
+    // Método para eliminar un cliente
+    public static void eliminarCliente() {
+        JComboBox<Cliente> comboClientes = new JComboBox<>(clientes.toArray(new Cliente[0]));
+        int opcion = JOptionPane.showConfirmDialog(null, comboClientes, "Seleccione Cliente a Eliminar", JOptionPane.OK_CANCEL_OPTION);
+
+        if (opcion == JOptionPane.OK_OPTION) {
+            Cliente seleccionado = (Cliente) comboClientes.getSelectedItem();
+            if (seleccionado != null) {
+                clientes.remove(seleccionado);
+                JOptionPane.showMessageDialog(null, "Cliente eliminado exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se seleccionó ningún cliente.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    // Método para modificar un cliente
+    public static void modificarCliente() {
+        JComboBox<Cliente> comboClientes = new JComboBox<>(clientes.toArray(new Cliente[0]));
+        int opcion = JOptionPane.showConfirmDialog(null, comboClientes, "Seleccione Cliente a Modificar", JOptionPane.OK_CANCEL_OPTION);
+
+        if (opcion == JOptionPane.OK_OPTION) {
+            Cliente seleccionado = (Cliente) comboClientes.getSelectedItem();
+            if (seleccionado != null) {
+                JTextField campoRut = new JTextField(seleccionado.rut);
+                JTextField campoNombre = new JTextField(seleccionado.nombreCompleto);
+                JTextField campoTelefono = new JTextField(seleccionado.telefono);
+                JTextField campoCorreo = new JTextField(seleccionado.correo);
+
+                Object[] mensaje = {
+                        "RUT:", campoRut,
+                        "Nombre Completo:", campoNombre,
+                        "Teléfono:", campoTelefono,
+                        "Correo Electrónico:", campoCorreo
+                };
+
+                int modificar = JOptionPane.showConfirmDialog(null, mensaje, "Modificar Cliente", JOptionPane.OK_CANCEL_OPTION);
+                if (modificar == JOptionPane.OK_OPTION) {
+                    try {
+                        seleccionado.rut = campoRut.getText();
+                        seleccionado.nombreCompleto = campoNombre.getText();
+                        seleccionado.telefono = campoTelefono.getText();
+                        seleccionado.correo = campoCorreo.getText();
+
+                        JOptionPane.showMessageDialog(null, "Cliente modificado exitosamente.");
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Error al modificar cliente.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No se seleccionó ningún cliente.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        return nombreCompleto + " (" + rut + ")";
     }
 }
